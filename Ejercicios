@@ -1,0 +1,385 @@
+-- Ejercicio 1. Definir la función promedio3 tal que (promedio3 x y z) es
+ 
+promedio x y z = (x + y + z) / 3
+
+-- Ejercicio 2. Definir la función sumaMonedas tal que (sumaMonedas a b c d e) es la suma de las monedas  correspondientes a
+-- a monedas de 1 peso, b de 2 pesos, c de 5 pesos, d 10 pesos y e de 20 pesos.
+
+sumaMonedas a b c d e = a*1 + b*2 + c*5 + d*10 + e*20 
+
+-- Ejercicio 3. Definir la función volumenEsfera tal que (volumenEsfera r) es el volumen de la esfera de radio r.
+
+volumenEsfera r = (4/3) * pi *(r^3)
+
+-- Ejercicio 4. Definir la función areaDeCoronaCircular tal que (areaDeCoronaCircular r1 r2) es el área de una corona circular de
+-- radio interior r1 y radio exterior r2.
+
+areaDeCoronaCircular :: Floating a => a -> a -> a
+areaDeCoronaCircular r r2 = pi * (r2^2 - r^2)
+
+
+-- Ejercicio 5. Definir la función ultimaCifra tal que (ultimaCifra x) es la última cifra del número x.
+
+ultimaCifra :: Integral a => a -> a
+ultimaCifra x = rem x 10 
+
+-- Ejercicio 6. Definir la función maxTres tal que (maxTres x y z) es el máximo de x, y y z.
+
+maxTres :: (Ord a) => a -> a -> a -> a
+maxTres x y z = max x (max y z)
+
+
+-- Ejercicio 7. Definir la función rota1 tal que (rota1 xs) es la lista
+-- obtenida poniendo el primer elemento de xs al final de la lista.
+
+rota1 :: [a] -> [a]
+rota1 [] = []
+rota1 (x:xs) = xs ++ [x]
+
+-- Ejercicio 8. Definir la función rota tal que (rota n xs) es la lista 
+-- obtenida poniendo los n primeros elementos de xs al final de la lista.
+
+rota :: Int -> [a] -> [a]
+rota n xs = drop n xs ++ take n xs
+
+-- Ejercicio 9. Definir la función rango tal que (rango xs) es la lista formada por el menor y mayor elemento de xs.
+
+
+rango [] = []
+rango xs = [minimum xs, maximum xs]
+
+-- Ejercicio 10. Definir la función palindromo tal que (palindromo xs) se verifica si xs es un palíndromo; es decir, es lo mismo leer xs de
+-- izquierda a derecha que de derecha a izquierda.
+
+palindromo :: Eq a => [a] -> Bool
+palindromo xs = xs == reverse xs
+
+-- Ejercicio 11. Definir la función interior tal que (interior xs) es la lista obtenida eliminando los extremos de la lista xs. 
+
+interior :: [a] -> [a]
+interior [] = []          
+interior [_] = []         
+interior xs = tail (init xs)
+
+-- Ejercicio 13. Definir la función segmento tal que (segmento m n xs) es
+-- la lista de los elementos de xs comprendidos entre las posiciones m y n.
+
+segmento m n xs = take(n - m)(drop m xs)
+
+
+-- Ejercicio 14. Definir la función extremos tal que (extremos n xs) es
+-- la lista formada por los n primeros elementos de xs y los n finales
+-- elementos de xs.
+
+extremos n xs = take n xs ++ drop (length xs - n) xs
+
+-- Ejercicio 15. Definir la función mediano tal que (mediano x y z) es el
+-- número mediano de los tres números x, y y z.
+
+mediano x y z = (x + y + z) - (min x (min y z)) - (max x (max y z))
+
+
+-- Ejercicio 16. Definir la función tresIguales tal que
+-- (tresIguales x y z) se verifica si los elementos x, y y z son
+-- iguales.
+
+tresIguales x y z = x == y && y == z
+
+-- Ejercicio 17. Definir la función tresDiferentes tal que
+-- (tresDiferentes x y z) se verifica si los elementos x, y y z son
+-- distintos.
+
+tresDiferentes x y z = x /= y && x /= z && y /= z
+
+-- Ejercicio 18. Definir la función cuatroIguales tal que
+-- (cuatroIguales x y z u) se verifica si los elementos x, y, z y u son
+-- iguales.
+
+cuatroIguales :: Eq a => a -> a -> a -> a -> Bool
+cuatroIguales x y z u = tresIguales x y z && x == u
+
+
+--Guardas y patrones
+
+-- Ejercicio 1. Definir la función
+-- divisionSegura :: Double -> Double -> Double
+-- tal que (divisionSegura x y) es x/y si y no es cero y 9999 en caso
+-- contrario.
+divisionSegura :: Double -> Double -> Double
+divisionSegura x y
+    | y == 0    = 9999.0
+    | otherwise = x / y
+
+-- Ejercicio 2 La disyunción excluyente xor de dos fórmulas se
+-- verifica si una es verdadera y la otra es falsa. Su tabla de verdad
+-- es
+--x     | y     | xor x y
+--True  | True  | False
+--True  | False | True
+--False | True  | True
+--False | False | False
+
+xor1 :: Bool -> Bool -> Bool
+xor1 x y = (x || y) && not (x && y)
+
+
+-- Ejercicio 3. Las dimensiones de los rectángulos puede representarse
+-- por pares;
+
+mayorRectangulo :: (Integer,Integer) -> (Integer,Integer) -> (Integer,Integer)
+mayorRectangulo (a1, h1) (a2, h2)
+    | a1 * h1 >= a2 * h2 = (a1, h1)
+    | otherwise           = (a2, h2)
+
+-- Ejercicio 4. Definir la función
+-- intercambia :: (a,b) -> (b,a)
+-- tal que (intercambia p) es el punto obtenido intercambiando las
+-- coordenadas del punto p.
+
+intercambia :: (a, b) -> (b, a)
+intercambia (x, y) = (y, x)
+
+
+-- Ejercicio 5. Definir la función
+-- distancia :: (Double,Double) -> (Double,Double) -> Double
+-- tal que (distancia p1 p2) es la distancia entre los puntos p1 y
+-- p2. 
+
+distancia :: (Double, Double) -> (Double, Double) -> Double
+distancia (x1, y1) (x2, y2) = sqrt ((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+
+
+-- Ejercicio 6. Definir una función
+-- ciclo :: [a] -> [a]
+-- tal que (ciclo xs) es la lista obtenida permutando cíclicamente los
+-- elementos de la lista xs, pasando el último elemento al principio de
+-- la lista.
+
+ciclo :: [a] -> [a]
+ciclo [] = []
+ciclo xs = last xs : init xs
+
+-- Ejercicio 7. Definir la función
+-- numeroMayor :: (Num a, Ord a) => a -> a -> a
+-- tal que (numeroMayor x y) es el mayor número de dos cifras que puede
+-- construirse con los dígitos x e y.
+
+numeroMayor :: (Num a, Ord a) => a -> a -> a
+numeroMayor x y = max (10 * x + y) (10 * y + x)
+
+
+-- Ejercicio 8. Definir la función
+-- numeroDeRaices :: (Floating t, Ord t) => t -> t -> t -> Int
+-- tal que (numeroDeRaices a b c) es el número de raíces reales de la
+    -- ecuación a*x^2 + b*x + c = 0.
+
+numeroDeRaices :: (Floating t, Ord t) => t -> t -> t -> Int
+numeroDeRaices a b c
+    | discriminante > 0 = 2
+    | discriminante == 0 = 1
+    | otherwise         = 0
+  where
+    discriminante = b ^ 2 - 4 * a * c
+
+
+-- Ejercicio 9. Definir la función
+-- raices :: Double -> Double -> Double -> [Double]
+-- tal que (raices a b c) es la lista de las raíces reales de la
+-- ecuación ax^2 + bx + c = 0.
+
+raices :: Double -> Double -> Double -> [Double]
+raices a b c
+  | discriminante > 0 = [(-b + sqrt discriminante) / (2 * a), (-b - sqrt discriminante) / (2 * a)]
+  | discriminante == 0 = [-b / (2 * a)]
+  | otherwise = []  
+  where
+    discriminante = b^2 - 4 * a * c
+
+
+-- Ejercicio 10. En geometría, la fórmula de Herón, descubierta por
+-- Herón de Alejandría, dice que el área de un triángulo cuyo lados
+-- miden a, b y c es la raíz cuadrada de s(s-a)(s-b)(s-c) donde s es el
+-- semiperímetro
+-- s = (a+b+c)/2
+
+areaTriangulo :: Double -> Double -> Double -> Double
+areaTriangulo a b c = sqrt (s * (s - a) * (s - b) * (s - c))
+  where
+    s = (a + b + c) / 2 
+
+-- Ejercicio 11. Los intervalos cerrados se pueden representar mediante
+-- una lista de dos números (el primero es el extremo inferior del
+-- intervalo y el segundo el superior).
+
+interseccion :: Ord a => [a] -> [a] -> [a]
+interseccion [] _ = []  
+interseccion _ [] = []  
+interseccion [a1, b1] [a2, b2]
+  | max a1 a2 <= min b1 b2 = [max a1 a2, min b1 b2]  
+  | otherwise = []  
+interseccion _ _ = []  
+
+-- Ejercicio 12. Los triángulos aritméticos se forman como sigue
+--1
+--2 3
+--4 5 6
+--7 8 9 10
+--11 12 13 14 15
+--16 17 18 19 20 21
+
+linea :: Integer -> [Integer]
+linea n = let primerElem = (n * (n - 1)) `div` 2 + 1  -- Primer número de la línea n
+          in [primerElem..primerElem + n - 1]  -- Lista desde el primer número hasta el último número de la línea
+
+
+
+-- Recursividad
+
+-- Ejercicio 1. Definir por recursión la función
+--potencia :: Integer -> Integer -> Integer
+-- tal que (potencia x n) es x elevado al número natural n.
+-- Definir la función potencia de manera recursiva
+
+
+potencia :: Integer -> Integer -> Integer
+potencia _ 0 = 1  -- Caso base
+potencia x n = x * potencia x (n - 1)  -- Caso recursivo
+
+-- Ejercicio 2. Dados dos números naturales, a y b, es posible
+-- calcular su máximo común divisor mediante el Algoritmo de
+-- Euclides. Este algoritmo se puede resumir en la siguiente fórmula:
+--mcd(a,b) = a, si b = 0
+--         = mcd (b, a módulo b), si b > 0
+
+mcd :: Integer -> Integer -> Integer
+mcd a 0 = a  -- Caso base
+mcd a b = mcd b (a `mod` b)  -- Caso recursivo
+
+
+-- Ejercicio 3, Definir por recursión la función
+--pertenece :: Eq a => a -> [a] -> Bool
+-- tal que (pertenece x xs) se verifica si x pertenece a la lista xs.
+
+pertenece :: Eq a => a -> [a] -> Bool
+pertenece _ [] = False  -- Caso base
+
+pertenece x (y:ys) 
+  | x == y    = True   -- Si el primer elemento es x, pertenece
+  | otherwise = pertenece x ys  -- caso recursivo
+
+
+-- Ejercicio 4. Definir por recursión la función
+--tomar :: Int -> [a] -> [a]
+-- tal que (tomar n xs) es la lista de los n primeros elementos de
+-- xs. 
+
+tomar :: Int -> [a] -> [a]
+tomar 0 _ = []          -- Caso base
+tomar _ [] = []         -- Caso base
+tomar n (x:xs) = x : tomar (n - 1) xs  -- Caso recursivo
+
+
+
+-- Ejercicio 5. Definir, por comprensión, la función
+--digitosC :: Integer -> [Integer]
+-- tal que (digitosC n) es la lista de los dígitos del número n. 
+
+digitosC :: Integer -> [Integer]
+digitosC n = [read [d] | d <- show n]  -- Convertir n a cadena, luego a lista de dígitos
+
+
+-- Ejercicio 6. Definir, por recursión, la función
+-- sumaDigitosR :: Integer -> Integer
+-- tal que (sumaDigitosR n) es la suma de los dígitos de n.
+
+sumaDigitosR :: Integer -> Integer
+sumaDigitosR 0 = 0                             -- Caso base
+sumaDigitosR n = (n `mod` 10) + sumaDigitosR (n `div` 10)  -- Caso recursivo
+
+
+-- Ejercicio 2.1. Para ordenar una lista xs mediante el algoritmo de
+-- ordenación rápida se selecciona el primer elemento x de xs, se divide
+-- los restantes en los menores o iguales que x y en los mayores que x,
+-- se ordena cada una de las dos partes y se unen los resultados.
+
+
+
+--Nuevos tipos de datos
+
+--1.- Crea un nuevo tipo Estudiate con los siguientes atributos
+-- Nombre, Apellido, Edad, Número de control 
+-- Genera una lista de un mínimo de 10 estudiantes en donde obtendras
+
+-- Lista ordenada de los estudiantes de acuedo a la edad
+-- Obtener al estudiante menor, mayor
+-- Obtener el promedio de edades.
+
+data Estudiante = Estudiante
+  { nombre       :: String
+  , apellido     :: String
+  , edad         :: Int
+  , noControl   :: String
+  } deriving (Show, Eq)
+
+-- Lista de estudiantes
+estudiantes :: [Estudiante]
+estudiantes =
+  [ Estudiante "Jose" "Vazquez" 21 "20161288"
+  , Estudiante "Manuel" "Osorio" 21 "20161289"
+  , Estudiante "Luis" "Gomez" 19 "20161290"
+  , Estudiante "Pedro" "Gonzales" 18 "20161291"
+  , Estudiante "Lucia" "Cruz" 19 "20161292"
+  , Estudiante "Carolina" "Gutierrez" 22 "20161293"
+  , Estudiante "Irvin" "Pacheco" 24 "20161294"
+  , Estudiante "Rubi" "Garcia" 23 "20161295"
+  , Estudiante "Estela" "Sanchez" 23 "20161296"
+  , Estudiante "Aurora" "Perez" 18 "20161297"
+  ]
+insertarPorEdad :: Estudiante -> [Estudiante] -> [Estudiante]
+insertarPorEdad estudiante [] = [estudiante]
+insertarPorEdad estudiante (x:xs)
+  | edad estudiante <= edad x = estudiante : x : xs
+  | otherwise = x : insertarPorEdad estudiante xs
+
+-- Algoritmo de ordenamiento por inserción
+ordenarPorEdad :: [Estudiante] -> [Estudiante]
+ordenarPorEdad [] = []
+ordenarPorEdad (x:xs) = insertarPorEdad x (ordenarPorEdad xs)
+
+-- Función para obtener al estudiante más joven (menor edad)
+obtenerMenor :: [Estudiante] -> Estudiante
+obtenerMenor [x] = x
+obtenerMenor (x:xs)
+  | edad x <= edad menorResto = x
+  | otherwise = menorResto
+  where menorResto = obtenerMenor xs
+
+-- Función para obtener al estudiante mayor (mayor edad)
+obtenerMayor :: [Estudiante] -> Estudiante
+obtenerMayor [x] = x
+obtenerMayor (x:xs)
+  | edad x >= edad mayorResto = x
+  | otherwise = mayorResto
+  where mayorResto = obtenerMayor xs
+
+  -- Función para obtener la suma de las edades de todos los estudiantes
+sumaEdades :: [Estudiante] -> Int
+sumaEdades [] = 0
+sumaEdades (x:xs) = edad x + sumaEdades xs
+
+-- Función para obtener el número total de estudiantes
+numeroDeEstudiantes :: [Estudiante] -> Int
+numeroDeEstudiantes [] = 0
+numeroDeEstudiantes (_:xs) = 1 + numeroDeEstudiantes xs
+
+-- Función para obtener el promedio de las edades
+promedioEdades :: [Estudiante] -> Double
+promedioEdades estudiantes = fromIntegral (sumaEdades estudiantes) / fromIntegral (numeroDeEstudiantes estudiantes)
+
+--Arboles
+
+--Crea un nuevo tipo de dato árbol
+--Funciones
+--1.- Insertar desde un arreglo 
+--2.- Buscar un elemento en un árbol
+--3.- Recorridos (Inorden, posorden, preorden)
